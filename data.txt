@@ -1,0 +1,673 @@
+// Example 1: A graph that connects people to the papers
+// that they worked on. People can be colour coded according to
+// their discipline.
+
+// To colour code a person by their discipline, after running the query
+// click on the respective label (Engineer, ComputerScientist) and
+// select a colour at the bottom of the window.
+
+// Clear the database (must do this every time you run the query or
+// it will duplicate nodes and edges)
+MATCH (n) DETACH DELETE(n);
+
+// Create People and Paper nodes
+// Give each person a discipline label so that it can be coloured
+// accordingly in Neo4j
+
+CREATE (n:Person:Engineer {name: "M.Hodkiewicz"});
+CREATE (n:Person:ComputerScientist {name: "W.Liu"});
+CREATE (n:Person:ComputerScientist {name: "M.Stewart"});
+CREATE (n:Person:ComputerScientist {name: "T.French"});
+CREATE (n:Person:ComputerScientist {name: "C.Woods"});
+CREATE (n:Person:ComputerScientist {name: "T.Smoker"});
+CREATE (n:Person:Ontologist {name: "E.Low"});
+CREATE (n:Person:Ontologist {name: "J.W.Kluwer"});
+CREATE (n:Person:Engineer {name: "J.Moffatt"});
+CREATE (n:Person:Mathematician {name: "A.Zaitouny"});
+CREATE (n:Person:Mathematician {name: "M.Small"});
+CREATE (n:Person:ComputerScientist {name: "T.Bikaun"});
+CREATE (n:Person:Engineer {name: "J.Jorgensen"});
+CREATE (n:Person:Statistician {name: "E.Cripps"});
+CREATE (n:Person:ComputerScientist {name: "G.M.Hassan"});
+CREATE (n:Person:Psychologist {name: "M.Griffin"});
+CREATE (n:Person:Psychologist {name: "L.Kanse"});
+CREATE (n:Person:ComputerScientist {name: "S.Lukens"});
+CREATE (n:Person:Engineer {name: "M.Brundage"});
+CREATE (n:Person:Engineer {name: "T.Sexton"});
+CREATE (n:Person:Mathematician {name: "B.Thorne"});
+CREATE (n:Person:Mathematician {name: "T.Jungling"});
+CREATE (n:Person:Statistician {name: "N.Khan"});
+CREATE (n:Person:ComputerScientist {name: "C.Webb"});
+CREATE (n:Person:Engineer {name: "J.Sikorska"});
+CREATE (n:Person:ComputerScientist {name: "A.Dima"});
+CREATE (n:Person:Engineer {name: "A.Bartels"});
+CREATE (n:Person:Engineer {name: "A.Keating"});
+CREATE (n:Person:Engineer {name: "I.Milne"});
+CREATE (n:Person:Physicist {name: "B.Travaglione"});
+CREATE (n:Person:ComputerScientist {name: "Y.Gao"});
+CREATE (n:Person:Engineer {name: "A.Ziegelaar"});
+CREATE (n:Person:ComputerScientist {name: "S.Bradley"});
+CREATE (n:Person:ComputerScientist {name: "R.Fraser"});
+CREATE (n:Person:Ontologist {name: "D.Lupp"});
+CREATE (n:Person:Ontologist {name: "M.Skjaeveland"});
+CREATE (n:Person:Statistician {name: "A.Manderson"});
+CREATE (n:Person:Engineer {name: "M.Rayson"});
+CREATE (n:Person:Statistician {name: "L.Astfalck"});
+CREATE (n:Person:Ontologist {name: "H.Karray"});
+CREATE (n:Person:Ontologist {name: "F.Ameri"});
+
+
+CREATE (n:Paper {name: "FMEA Ontology"});
+CREATE (n:Paper {name: "Cascading failures"});
+CREATE (n:Paper {name: "Reliability measures for MWO"});
+CREATE (n:Paper {name: "Bayesian prediction bolt stress"});
+CREATE (n:Paper {name: "Job characteristics for maintenance procedures"});
+CREATE (n:Paper {name: "Rethinking maintenance for Industry 4.0"});
+CREATE (n:Paper {name: "Reservoir computing applied to maintenance"});
+CREATE (n:Paper {name: "Variable selection for conveyor wear"});
+CREATE (n:Paper {name: "TLP: unlocking maintenance knowledge"});
+CREATE (n:Paper {name: "Soft sensor modesl for MEMS"});
+CREATE (n:Paper {name: "Pipeline for reading MWO"});
+CREATE (n:Paper {name: "Digitalisation of tables"});
+CREATE (n:Paper {name: "Low cost Sensing of remote assets"});
+CREATE (n:Paper {name: "DRAT: data risk assessment tool"});
+CREATE (n:Paper {name: "Template libraries for scalable ontologies"});
+CREATE (n:Paper {name: "Evaluating predictive models for conveyor belts"});
+CREATE (n:Paper {name: "Requirements for adaptive user interfaces"});
+CREATE (n:Paper {name: "Categorisation errors for data entry in MWO"});
+CREATE (n:Paper {name: "Annotator agreement in MWO data mining"});
+CREATE (n:Paper {name: "Technology implementation in maintenance"});
+CREATE (n:Paper {name: "UQ in predicting ocean dynamics"});
+CREATE (n:Paper {name: "Bayesian extremal responses for structures"});
+CREATE (n:Paper {name: "ROMAIN maintenance ontology"});
+CREATE (n:Paper {name: "Benchmarking keyword extraction"});
+CREATE (n:Paper {name: "Expert elicitation directional metocean parameters"});
+CREATE (n:Paper {name: "Compliance with work procedures"});
+CREATE (n:Paper {name: "Fault prediction in networks"});
+CREATE (n:Paper {name: "Calibration CPH models"});
+CREATE (n:Paper {name: "Procedure management and compliance"});
+CREATE (n:Paper {name: "Cognitive computing maintenance data"});
+CREATE (n:Paper {name: "CPH modelling of blockages"});
+
+
+// Create relationships between people and papers
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "FMEA Ontology"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "J.W.Kluwer"})
+WITH per
+MATCH (paper:Paper {name: "FMEA Ontology"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "C.Woods"})
+WITH per
+MATCH (paper:Paper {name: "FMEA Ontology"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "E.>Low"})
+WITH per
+MATCH (paper:Paper {name: "FMEA Ontology"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.Smoker"})
+WITH per
+MATCH (paper:Paper {name: "FMEA Ontology"})
+CREATE (per)-[r:WROTE]->(paper);
+
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Cascading failures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "J.Moffatt"})
+WITH per
+MATCH (paper:Paper {name: "Cascading failures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "A.Zaitouny"})
+WITH per
+MATCH (paper:Paper {name: "Cascading failures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Small"})
+WITH per
+MATCH (paper:Paper {name: "Cascading failures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Reliability measures for MWO"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.Bikaun"})
+WITH per
+MATCH (paper:Paper {name: "Reliability measures for MWO"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Bayesian prediction bolt stress"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "J.Jorgensen"})
+WITH per
+MATCH (paper:Paper {name: "Bayesian prediction bolt stress"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "E.Cripps"})
+WITH per
+MATCH (paper:Paper {name: "Bayesian prediction bolt stress"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "G.M.Hassan"})
+WITH per
+MATCH (paper:Paper {name: "Bayesian prediction bolt stress"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Job characteristics for maintenance procedures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "C.Woods"})
+WITH per
+MATCH (paper:Paper {name: "Job characteristics for maintenance procedures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+
+MATCH (per:Person {name: "M.Griffin"})
+WITH per
+MATCH (paper:Paper {name: "Job characteristics for maintenance procedures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+
+MATCH (per:Person {name: "T.French"})
+WITH per
+MATCH (paper:Paper {name: "Job characteristics for maintenance procedures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Rethinking maintenance for Industry 4.0"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "S.Lukens"})
+WITH per
+MATCH (paper:Paper {name: "Rethinking maintenance for Industry 4.0"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Brundage"})
+WITH per
+MATCH (paper:Paper {name: "Rethinking maintenance for Industry 4.0"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.Sexton"})
+WITH per
+MATCH (paper:Paper {name: "Rethinking maintenance for Industry 4.0"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Reservoir computing applied to maintenance"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "B.Thorne"})
+WITH per
+MATCH (paper:Paper {name: "Reservoir computing applied to maintenance"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.Jungling"})
+WITH per
+MATCH (paper:Paper {name: "Reservoir computing applied to maintenance"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Small"})
+WITH per
+MATCH (paper:Paper {name: "Reservoir computing applied to maintenance"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Variable selection for conveyor wear"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "N.Khan"})
+WITH per
+MATCH (paper:Paper {name: "Variable selection for conveyor wear"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "J.Sikorska"})
+WITH per
+MATCH (paper:Paper {name: "Variable selection for conveyor wear"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "C.Webb"})
+WITH per
+MATCH (paper:Paper {name: "Variable selection for conveyor wear"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkieiwcz"})
+WITH per
+MATCH (paper:Paper {name: "TLP: unlocking maintenance knowledge"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Brundage"})
+WITH per
+MATCH (paper:Paper {name: "TLP: unlocking maintenance knowledge"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.Sexton"})
+WITH per
+MATCH (paper:Paper {name: "TLP: unlocking maintenance knowledge"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "A.Dima"})
+WITH per
+MATCH (paper:Paper {name: "TLP: unlocking maintenance knowledge"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "S.Lukens"})
+WITH per
+MATCH (paper:Paper {name: "TLP: unlocking maintenance knowledge"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Soft sensor modesl for MEMS"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "A.Bartels"})
+WITH per
+MATCH (paper:Paper {name: "Soft sensor modesl for MEMS"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "E.Cripps"})
+WITH per
+MATCH (paper:Paper {name: "Soft sensor modesl for MEMS"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "A.Keating"})
+WITH per
+MATCH (paper:Paper {name: "Soft sensor modesl for MEMS"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "I.Milne"})
+WITH per
+MATCH (paper:Paper {name: "Soft sensor modesl for MEMS"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "B.Travaglione"})
+WITH per
+MATCH (paper:Paper {name: "Soft sensor modesl for MEMS"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Pipeline for reading MWO"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "Y.Gao"})
+WITH per
+MATCH (paper:Paper {name: "Pipeline for reading MWO"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "C.Woods"})
+WITH per
+MATCH (paper:Paper {name: "Pipeline for reading MWO"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "W.Liu"})
+WITH per
+MATCH (paper:Paper {name: "Pipeline for reading MWO"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.French"})
+WITH per
+MATCH (paper:Paper {name: "Pipeline for reading MWO"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Digitalisation of tables"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "J.W.Kluwer"})
+WITH per
+MATCH (paper:Paper {name: "Digitalisation of tables"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "C.Woods"})
+WITH per
+MATCH (paper:Paper {name: "Digitalisation of tables"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.Smoker"})
+WITH per
+MATCH (paper:Paper {name: "Digitalisation of tables"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.French"})
+WITH per
+MATCH (paper:Paper {name: "Digitalisation of tables"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Low cost Sensing of remote assets"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "A.Ziegelaar"})
+WITH per
+MATCH (paper:Paper {name: "Low cost Sensing of remote assets"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "B.Travaglione"})
+WITH per
+MATCH (paper:Paper {name: "Low cost Sensing of remote assets"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "DRAT: data risk assessment tool"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "J.Sikorska"})
+WITH per
+MATCH (paper:Paper {name: "DRAT: data risk assessment tool"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "S.Bradley"})
+WITH per
+MATCH (paper:Paper {name: "DRAT: data risk assessment tool"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "R.Fraser"})
+WITH per
+MATCH (paper:Paper {name: "DRAT: data risk assessment tool"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Template libraries for scalable ontologies"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "D.Lupp"})
+WITH per
+MATCH (paper:Paper {name: "Template libraries for scalable ontologies"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Skjaeveland"})
+WITH per
+MATCH (paper:Paper {name: "Template libraries for scalable ontologies"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Evaluating predictive models for conveyor belts"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "C.Webb"})
+WITH per
+MATCH (paper:Paper {name: "Evaluating predictive models for conveyor belts"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "J.Sikorska"})
+WITH per
+MATCH (paper:Paper {name: "Evaluating predictive models for conveyor belts"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "N.Khan"})
+WITH per
+MATCH (paper:Paper {name: "Evaluating predictive models for conveyor belts"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Requirements for adaptive user interfaces"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "C.Woods"})
+WITH per
+MATCH (paper:Paper {name: "Requirements for adaptive user interfaces"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.French"})
+WITH per
+MATCH (paper:Paper {name: "Requirements for adaptive user interfaces"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Requirements for adaptive user interfaces"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Brundage"})
+WITH per
+MATCH (paper:Paper {name: "Requirements for adaptive user interfaces"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.Sexton"})
+WITH per
+MATCH (paper:Paper {name: "Requirements for adaptive user interfaces"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Annotator agreement in MWO data mining"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Brundage"})
+WITH per
+MATCH (paper:Paper {name: "Annotator agreement in MWO data mining"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.Sexton"})
+WITH per
+MATCH (paper:Paper {name: "Annotator agreement in MWO data mining"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Technology implementation in maintenance"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Brundage"})
+WITH per
+MATCH (paper:Paper {name: "Technology implementation in maintenance"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.Sexton"})
+WITH per
+MATCH (paper:Paper {name: "Technology implementation in maintenance"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "F.Ameri"})
+WITH per
+MATCH (paper:Paper {name: "Technology implementation in maintenance"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "UQ in predicting ocean dynamics"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "L.Astfalck"})
+WITH per
+MATCH (paper:Paper {name: "UQ in predicting ocean dynamics"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "E.Cripps"})
+WITH per
+MATCH (paper:Paper {name: "UQ in predicting ocean dynamics"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Bayesian extremal responses for structures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "L.Astfalck"})
+WITH per
+MATCH (paper:Paper {name: "Bayesian extremal responses for structures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "E.Cripps"})
+WITH per
+MATCH (paper:Paper {name: "Bayesian extremal responses for structures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "I.Milne"})
+WITH per
+MATCH (paper:Paper {name: "Bayesian extremal responses for structures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "J.P.Gosling"})
+WITH per
+MATCH (paper:Paper {name: "Bayesian extremal responses for structures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "ROMAIN maintenance ontology"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "H.Karray"})
+WITH per
+MATCH (paper:Paper {name: "ROMAIN maintenance ontology"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "F.Ameri"})
+WITH per
+MATCH (paper:Paper {name: "ROMAIN maintenance ontology"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Benchmarking keyword extraction"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.Sexton"})
+WITH per
+MATCH (paper:Paper {name: "Benchmarking keyword extraction"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Brundage"})
+WITH per
+MATCH (paper:Paper {name: "Benchmarking keyword extraction"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.Smoker"})
+WITH per
+MATCH (paper:Paper {name: "Benchmarking keyword extraction"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Expert elicitation directional metocean parameters"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "L.Astfalck"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "E.Cripps"})
+WITH per
+MATCH (paper:Paper {name: "Expert elicitation directional metocean parameters"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "I.Milne"})
+WITH per
+MATCH (paper:Paper {name: "Expert elicitation directional metocean parameters"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "J.P.Gosling"})
+WITH per
+MATCH (paper:Paper {name: "Expert elicitation directional metocean parameters"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Compliance with work procedures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Griffin"})
+WITH per
+MATCH (paper:Paper {name: "Compliance with work procedures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Fault prediction in networks"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Small"})
+WITH per
+MATCH (paper:Paper {name: "Fault prediction in networks"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Calibration CPH models"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "E.Cripps"})
+WITH per
+MATCH (paper:Paper {name: "Calibration CPH models"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Procedure management and compliance"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Griffin"})
+WITH per
+MATCH (paper:Paper {name: "Procedure management and compliance"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "L.Kanse"})
+WITH per
+MATCH (paper:Paper {name: "Procedure management and compliance"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "Cognitive computing maintenance data"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.Smoker"})
+WITH per
+MATCH (paper:Paper {name: "Cognitive computing maintenance data"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "T.French"})
+WITH per
+MATCH (paper:Paper {name: "Cognitive computing maintenance data"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "W.Liu"})
+WITH per
+MATCH (paper:Paper {name: "Cognitive computing maintenance data"})
+CREATE (per)-[r:WROTE]->(paper);
+
+
+MATCH (per:Person {name: "M.Hodkiewicz"})
+WITH per
+MATCH (paper:Paper {name: "CPH modelling of blockages"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "N.Khan"})
+WITH per
+MATCH (paper:Paper {name: "CPH modelling of blockages"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH (per:Person {name: "N.Khan"})
+WITH per
+MATCH (paper:Paper {name: "CPH modelling of blockages"})
+CREATE (per)-[r:WROTE]->(paper);
