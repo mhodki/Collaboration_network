@@ -250,7 +250,7 @@ WITH per
 MATCH (paper:Paper {name: "Variable selection for conveyor wear"})
 CREATE (per)-[r:WROTE]->(paper);
 
-MATCH (per:Person {name: "M.Hodkieiwcz"})
+MATCH (per:Person {name: "M.Hodkiewicz"})
 WITH per
 MATCH (paper:Paper {name: "TLP: unlocking maintenance knowledge"})
 CREATE (per)-[r:WROTE]->(paper);
@@ -601,6 +601,14 @@ WITH per
 MATCH (paper:Paper {name: "Compliance with work procedures"})
 CREATE (per)-[r:WROTE]->(paper);
 
+MATCH (per:Person {name: "L.Kanse"})
+WITH per
+MATCH (paper:Paper {name: "Compliance with work procedures"})
+CREATE (per)-[r:WROTE]->(paper);
+
+MATCH(n) RETURN(n)
+
+
 MATCH (per:Person {name: "M.Hodkiewicz"})
 WITH per
 MATCH (paper:Paper {name: "Fault prediction in networks"})
@@ -667,7 +675,4 @@ WITH per
 MATCH (paper:Paper {name: "CPH modelling of blockages"})
 CREATE (per)-[r:WROTE]->(paper);
 
-MATCH (per:Person {name: "N.Khan"})
-WITH per
-MATCH (paper:Paper {name: "CPH modelling of blockages"})
-CREATE (per)-[r:WROTE]->(paper);
+
